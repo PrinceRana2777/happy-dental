@@ -13,7 +13,6 @@ import {
   X, 
   CheckCircle2, 
   Menu, 
-  ExternalLink,
   Stethoscope,
   ShieldCheck,
   Award,
@@ -503,17 +502,6 @@ export default function App() {
                   </div>
                 </div>
 
-                <div className="flex gap-6">
-                  <div className="flex-shrink-0 w-12 h-12 bg-teal-50 text-teal-primary rounded-xl flex items-center justify-center">
-                    <ExternalLink />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-slate-900 mb-1">Website</h4>
-                    <a href="https://drnitinsingh.drxpro.in" target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-teal-primary transition-colors">
-                      drnitinsingh.drxpro.in
-                    </a>
-                  </div>
-                </div>
               </div>
 
               <div className="flex gap-4">
