@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
 import { 
   Phone, 
   MapPin, 
@@ -21,6 +22,10 @@ import {
   ExternalLink
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import AppointmentBooking from './components/AppointmentBooking';
+import DoctorProfile from './components/DoctorProfile';
+import LeadPopup from './components/LeadPopup';
+import { DOCTORS } from './data/doctors';
 
 const SERVICES = [
   { 
@@ -63,37 +68,17 @@ const SERVICES = [
   },
 ];
 
-const DOCTORS = [
-  {
-    name: "Dr. Nitin",
-    role: "Senior Implantologist",
-    experience: "15+ Years Experience",
-    image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=400&h=500"
-  },
-  {
-    name: "Dr. Nisha",
-    role: "Cosmetic Dentist & Orthodontist",
-    experience: "12+ Years Experience",
-    image: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&q=80&w=400&h=500"
-  },
-  {
-    name: "Dr. Associate",
-    role: "General Dentist",
-    experience: "8+ Years Experience",
-    image: "https://images.unsplash.com/photo-1559839734-2b71f153678f?auto=format&fit=crop&q=80&w=400&h=500"
-  }
-];
-
 const REVIEWS = [
   { name: "Rahul Sharma", rating: 5, text: "The dental implant procedure was completely painless. Dr. Nitin is truly an expert. Highly recommended!", date: "2 weeks ago" },
   { name: "Priya Mehta", rating: 5, text: "Best experience with clear aligners. The staff is very professional and the clinic is super clean.", date: "1 month ago" },
   { name: "Amit Kumar", rating: 5, text: "Affordable rates and excellent service. They explain everything clearly before starting treatment.", date: "3 months ago" },
 ];
 
-export default function App() {
+const Home = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -545,40 +530,63 @@ export default function App() {
       </section>
 
       {/* Doctors Section */}
-      <section id="doctors" className="py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="doctors" className="py-32 bg-white relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-teal-50/50 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-20">
-            <h3 className="text-teal-primary font-bold tracking-[0.2em] uppercase text-sm mb-4">Our Specialists</h3>
-            <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-6">Meet Our Expert Team</h2>
-            <p className="text-lg text-slate-500">Dedicated professionals committed to providing you with the highest standard of dental care.</p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <h3 className="text-teal-primary font-bold tracking-[0.2em] uppercase text-sm mb-4">Our Specialists</h3>
+              <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-6">Meet Our Expert Team</h2>
+              <p className="text-lg text-slate-500">Dedicated professionals committed to providing you with the highest standard of dental care.</p>
+            </motion.div>
           </div>
 
           <div className="grid md:grid-cols-3 gap-10">
             {DOCTORS.map((doc, idx) => (
               <motion.div 
                 key={idx}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className="group"
+                transition={{ delay: idx * 0.15, duration: 0.6 }}
+                className="group bg-white rounded-[2.5rem] p-6 border border-slate-100 hover:border-teal-100 transition-all duration-500 hover:shadow-[0_32px_64px_-16px_rgba(13,148,136,0.1)]"
               >
-                <div className="relative rounded-[2.5rem] overflow-hidden mb-8 shadow-xl">
-                  <img src={doc.image} alt={doc.name} className="w-full aspect-[4/5] object-cover transition-transform duration-700 group-hover:scale-110" referrerPolicy="no-referrer" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
-                    <div className="flex gap-4">
-                      <div className="w-10 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-teal-500 transition-colors cursor-pointer">
-                        <MessageSquare size={18} />
+                <div className="relative rounded-[2rem] overflow-hidden mb-8 aspect-[4/5]">
+                  <img 
+                    src={doc.image} 
+                    alt={doc.name} 
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                    referrerPolicy="no-referrer" 
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                </div>
+                
+                <div className="px-2">
+                  <h4 className="text-2xl font-bold text-slate-900 mb-1">{doc.name}</h4>
+                  <p className="text-teal-primary font-bold text-sm mb-2">{doc.role}</p>
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">{doc.experience}</p>
+                  <p className="text-slate-500 text-sm leading-relaxed line-clamp-3 group-hover:text-slate-600 transition-colors">
+                    {doc.bio}
+                  </p>
+                  
+                  <div className="mt-8 pt-6 border-t border-slate-50 flex items-center justify-between">
+                    <div className="flex gap-3">
+                      <div className="w-9 h-9 bg-slate-50 text-slate-400 rounded-xl flex items-center justify-center hover:bg-teal-500 hover:text-white transition-all cursor-pointer">
+                        <MessageSquare size={16} />
                       </div>
-                      <div className="w-10 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-teal-500 transition-colors cursor-pointer">
-                        <Phone size={18} />
+                      <div className="w-9 h-9 bg-slate-50 text-slate-400 rounded-xl flex items-center justify-center hover:bg-teal-500 hover:text-white transition-all cursor-pointer">
+                        <Phone size={16} />
                       </div>
                     </div>
+                    <Link to={`/doctor/${doc.id}`} className="text-xs font-bold text-teal-primary uppercase tracking-widest hover:underline">
+                      View Profile
+                    </Link>
                   </div>
                 </div>
-                <h4 className="text-2xl font-bold text-slate-900 mb-1">{doc.name}</h4>
-                <p className="text-teal-primary font-bold text-sm mb-2">{doc.role}</p>
-                <p className="text-slate-500 text-sm">{doc.experience}</p>
               </motion.div>
             ))}
           </div>
@@ -867,82 +875,34 @@ export default function App() {
                 <X size={24} />
               </button>
 
-              <div className="grid md:grid-cols-5 h-full">
-                <div className="md:col-span-2 medical-gradient p-10 text-white flex flex-col justify-between">
-                  <div>
-                    <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mb-8 backdrop-blur-sm">
-                      <Stethoscope size={32} />
-                    </div>
-                    <h3 className="text-xs font-black tracking-[0.3em] uppercase mb-2 opacity-80">Appointment</h3>
-                    <h2 className="text-4xl font-bold mb-6 leading-tight">Book Your Visit</h2>
-                    <p className="text-teal-100 text-sm leading-relaxed">Fill out the form and our team will get back to you within 30 minutes to confirm your slot.</p>
-                  </div>
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-3 text-sm font-bold">
-                      <CheckCircle2 size={18} className="text-teal-300" /> Painless Treatment
-                    </div>
-                    <div className="flex items-center gap-3 text-sm font-bold">
-                      <CheckCircle2 size={18} className="text-teal-300" /> Expert Doctors
-                    </div>
-                  </div>
-                </div>
-
-                <div className="md:col-span-3 p-10">
-                  <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); setIsPopupOpen(false); alert("Thank you! We will call you back shortly to confirm your appointment."); }}>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="col-span-2">
-                        <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 ml-1">Full Name</label>
-                        <input 
-                          type="text" 
-                          required
-                          placeholder="Enter your name"
-                          className="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:border-teal-primary focus:ring-4 focus:ring-teal-primary/5 outline-none transition-all font-medium"
-                        />
-                      </div>
-                      <div className="col-span-2">
-                        <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 ml-1">Phone Number</label>
-                        <div className="flex gap-3">
-                          <div className="px-5 py-4 bg-slate-100 border border-slate-100 rounded-2xl text-slate-500 font-bold">+91</div>
-                          <input 
-                            type="tel" 
-                            required
-                            pattern="[0-9]{10}"
-                            placeholder="9876543210"
-                            className="flex-1 px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:border-teal-primary focus:ring-4 focus:ring-teal-primary/5 outline-none transition-all font-medium"
-                          />
-                        </div>
-                      </div>
-                      <div className="col-span-2">
-                        <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 ml-1">Select Treatment</label>
-                        <div className="relative">
-                          <select className="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:border-teal-primary focus:ring-4 focus:ring-teal-primary/5 outline-none transition-all font-medium appearance-none">
-                            <option>Dental Implants (Priority)</option>
-                            <option>Clear Aligners</option>
-                            <option>Full Mouth Rehabilitation</option>
-                            <option>General Checkup</option>
-                            <option>Root Canal</option>
-                            <option>Cosmetic Dentistry</option>
-                          </select>
-                          <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
-                            <ArrowRight size={18} className="rotate-90" />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <button 
-                      type="submit"
-                      className="w-full py-5 medical-gradient text-white rounded-2xl font-bold text-lg shadow-2xl shadow-teal-900/20 hover:shadow-teal-900/40 hover:-translate-y-1 transition-all"
-                    >
-                      Confirm Request
-                    </button>
-                    <p className="text-center text-[10px] text-slate-400 font-bold uppercase tracking-widest">Safe & Secure Booking</p>
-                  </form>
-                </div>
+              <div className="h-full overflow-hidden">
+                <AppointmentBooking 
+                  onClose={() => setIsPopupOpen(false)}
+                  onConfirm={(data) => {
+                    console.log("Appointment Confirmed:", data);
+                    setIsPopupOpen(false);
+                    alert(`Thank you! Your ${data.type === 'video' ? 'Video' : 'In-Clinic'} appointment is confirmed for ${data.date.toLocaleDateString()} at ${data.time}.`);
+                  }}
+                />
               </div>
             </motion.div>
           </div>
         )}
       </AnimatePresence>
+
+      {/* Lead Generation Popup */}
+      <LeadPopup delay={1500} />
     </div>
+  );
+};
+
+export default function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/doctor/:id" element={<DoctorProfile />} />
+      </Routes>
+    </Router>
   );
 }
