@@ -84,7 +84,7 @@ const AppointmentBooking: React.FC<AppointmentBookingProps> = ({ onConfirm, onCl
       
       const message = `Hello, I would like to book an appointment at ${selectedTime}.`;
       const encodedMessage = encodeURIComponent(message);
-      const whatsappUrl = `https://wa.me/919326712719?text=${encodedMessage}`;
+      const whatsappUrl = `https://wa.me/919975780529?text=${encodedMessage}`;
       
       // Open WhatsApp in a new tab
       window.open(whatsappUrl, '_blank');

@@ -155,7 +155,7 @@ const DoctorProfile: React.FC = () => {
                   Book Appointment <ChevronRight size={20} />
                 </button>
                 <a 
-                  href="tel:+919326712719"
+                  href="tel:+919975780529"
                   className="bg-white text-slate-900 border-2 border-slate-100 px-10 py-5 rounded-2xl text-lg font-bold hover:bg-slate-50 hover:border-slate-200 transition-all flex items-center justify-center gap-3 shadow-sm"
                 >
                   <Phone size={20} className="text-teal-primary" /> Call Now
@@ -291,7 +291,7 @@ const DoctorProfile: React.FC = () => {
                       </div>
                       <div>
                         <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Phone</p>
-                        <p className="text-sm font-bold text-slate-700">+91 9326712719</p>
+                        <a href="tel:+919975780529" className="text-sm font-bold text-slate-700 hover:text-teal-primary transition-colors">+91 99757 80529</a>
                       </div>
                     </div>
                   </div>
@@ -363,7 +363,7 @@ const DoctorProfile: React.FC = () => {
 
       {/* Floating WhatsApp */}
       <a 
-        href="https://wa.me/919326712719"
+        href="https://wa.me/919975780529"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-24 right-8 z-40 w-14 h-14 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform animate-float"
