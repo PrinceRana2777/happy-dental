@@ -20,9 +20,10 @@ interface TimeSlot {
 interface AppointmentBookingProps {
   onConfirm: (data: any) => void;
   onClose: () => void;
+  doctorName?: string;
 }
 
-const AppointmentBooking: React.FC<AppointmentBookingProps> = ({ onConfirm, onClose }) => {
+const AppointmentBooking: React.FC<AppointmentBookingProps> = ({ onConfirm, onClose, doctorName }) => {
   const [consultationType, setConsultationType] = useState<'in-clinic' | 'video'>('in-clinic');
   const [selectedDate, setSelectedDate] = useState<number>(0);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
@@ -75,6 +76,19 @@ const AppointmentBooking: React.FC<AppointmentBookingProps> = ({ onConfirm, onCl
 
   const handleConfirm = () => {
     if (selectedTime) {
+      const dateStr = dates[selectedDate].fullDate.toLocaleDateString('en-US', { 
+        weekday: 'short', 
+        month: 'short', 
+        day: 'numeric' 
+      });
+      
+      const message = `Hello, I would like to book an appointment at ${selectedTime}.`;
+      const encodedMessage = encodeURIComponent(message);
+      const whatsappUrl = `https://wa.me/919975780529?text=${encodedMessage}`;
+      
+      // Open WhatsApp in a new tab
+      window.open(whatsappUrl, '_blank');
+
       onConfirm({
         type: consultationType,
         date: dates[selectedDate].fullDate,

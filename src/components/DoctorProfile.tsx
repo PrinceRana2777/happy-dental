@@ -398,11 +398,11 @@ const DoctorProfile: React.FC = () => {
 
               <div className="h-full overflow-hidden">
                 <AppointmentBooking 
+                  doctorName={doctor.name}
                   onClose={() => setIsBookingOpen(false)}
                   onConfirm={(data) => {
                     console.log("Appointment Confirmed:", data);
                     setIsBookingOpen(false);
-                    alert(`Thank you! Your ${data.type === 'video' ? 'Video' : 'In-Clinic'} appointment with ${doctor.name} is confirmed for ${data.date.toLocaleDateString()} at ${data.time}.`);
                   }}
                 />
               </div>

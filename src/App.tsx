@@ -881,7 +881,6 @@ const Home = () => {
                   onConfirm={(data) => {
                     console.log("Appointment Confirmed:", data);
                     setIsPopupOpen(false);
-                    alert(`Thank you! Your ${data.type === 'video' ? 'Video' : 'In-Clinic'} appointment is confirmed for ${data.date.toLocaleDateString()} at ${data.time}.`);
                   }}
                 />
               </div>
