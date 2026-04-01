@@ -257,11 +257,11 @@ const DoctorProfile: React.FC = () => {
                   <div className="space-y-4 mb-8">
                     <div className="flex justify-between items-center text-sm">
                       <span className="text-slate-400">Mon - Sat</span>
-                      <span className="font-bold">10:00 AM - 10:00 PM</span>
+                      <span className="font-bold">9:30 AM - 10:00 PM</span>
                     </div>
                     <div className="flex justify-between items-center text-sm">
                       <span className="text-slate-400">Sunday</span>
-                      <span className="font-bold">By Appointment</span>
+                      <span className="font-bold">10:00 AM - 2:30 PM</span>
                     </div>
                   </div>
                   <button 

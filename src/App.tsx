@@ -627,7 +627,7 @@ const Home = () => {
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
               {[
-                { icon: <Award className="w-6 h-6" />, text: "1000+ Root Canal Treatments successfully completed" },
+                { icon: <Award className="w-6 h-6" />, text: "10,000+ Root Canal Treatments Successfully Completed" },
                 { icon: <ShieldCheck className="w-6 h-6" />, text: "1000+ Dental Implants placed" },
                 { icon: <Clock className="w-6 h-6" />, text: "One of the oldest dental clinics in Vikhroli" },
                 { icon: <Zap className="w-6 h-6" />, text: "Equipped with modern and advanced dental technology" },
@@ -847,7 +847,10 @@ const Home = () => {
                   </div>
                   <div>
                     <h4 className="text-xl font-bold text-slate-900 mb-2">Clinic Timings</h4>
-                    <p className="text-slate-500 text-lg">Open Daily: 10:00 AM - 10:00 PM</p>
+                    <div className="space-y-1 text-slate-500 text-lg">
+                      <p><span className="font-bold text-slate-700">Mon - Sat:</span> 9:30 AM - 10:00 PM</p>
+                      <p><span className="font-bold text-slate-700">Sunday:</span> 10:00 AM - 2:30 PM</p>
+                    </div>
                     <div className="inline-flex items-center gap-2 bg-green-100 text-green-700 px-4 py-1.5 rounded-full text-xs font-bold mt-4">
                       <div className="w-2 h-2 bg-green-600 rounded-full animate-pulse"></div>
                       Currently Open
@@ -938,7 +941,10 @@ const Home = () => {
                   <div className="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center text-teal-400 group-hover:bg-teal-500 group-hover:text-white transition-all">
                     <Clock size={18} />
                   </div>
-                  <span className="text-sm">Daily: 10 AM - 10 PM</span>
+                  <div className="text-sm space-y-1">
+                    <p>Mon - Sat: 9:30 AM - 10:00 PM</p>
+                    <p>Sunday: 10:00 AM - 2:30 PM</p>
+                  </div>
                 </li>
               </ul>
             </div>
