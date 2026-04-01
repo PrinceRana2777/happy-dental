@@ -19,10 +19,10 @@ export const DOCTORS: Doctor[] = [
   {
     id: "dr-nitin",
     name: "Dr. Nitin",
-    role: "Senior Implantologist",
+    role: "Dentist / MDS / Implantologist",
     experience: "15+ Years Experience",
     bio: "Expert in Dental Implants and Full Mouth Rehabilitation. Known for precision, advanced techniques, and patient comfort.",
-    image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=400&h=500",
+    image: "https://iili.io/BffXwKJ.jpg",
     about: "Dr. Nitin is a highly experienced implantologist specializing in Dental Implants and Full Mouth Rehabilitation. With over 15 years of experience, he is known for precision, advanced techniques, and patient comfort. He has successfully placed over 5,000 implants and is a pioneer in immediate loading protocols.",
     specializations: [
       { icon: React.createElement(Smile, { size: 20 }), title: "Dental Implants" },
@@ -49,10 +49,10 @@ export const DOCTORS: Doctor[] = [
   {
     id: "dr-nisha",
     name: "Dr. Nisha",
-    role: "Cosmetic Dentist & Orthodontist",
+    role: "Dentist / MDS / Orthodontist",
     experience: "12+ Years Experience",
     bio: "Specializes in smile designing and clear aligners. Focused on aesthetic, natural-looking results with a gentle approach.",
-    image: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&q=80&w=400&h=500",
+    image: "https://iili.io/BffXk9p.jpg",
     about: "Dr. Nisha is a specialist in smile designing and clear aligners. Focused on aesthetic, natural-looking results with a gentle approach, she has transformed thousands of smiles. She combines her orthodontic expertise with cosmetic artistry to create balanced, beautiful results.",
     specializations: [
       { icon: React.createElement(Sparkles, { size: 20 }), title: "Clear Aligners" },
@@ -75,35 +75,32 @@ export const DOCTORS: Doctor[] = [
       { name: "Priya Mehta", rating: 5, text: "Best experience with clear aligners. The staff is very professional and the clinic is super clean.", date: "1 month ago" },
       { name: "Sneha Patil", rating: 5, text: "Dr. Nisha is so gentle. My smile makeover looks incredibly natural. Thank you!", date: "2 months ago" },
     ]
+  }
+];
+
+export const CONSULTANTS = [
+  {
+    specialization: "ORTHODONTIA",
+    doctors: ["Dr. Pallavi Rai", "Dr. Dhiraj Agrawal", "Dr. Feroz Khan"]
   },
   {
-    id: "dr-associate",
-    name: "Dr. Associate",
-    role: "General Dentist",
-    experience: "8+ Years Experience",
-    bio: "Provides comprehensive dental care with a focus on preventive and routine treatments.",
-    image: "https://images.unsplash.com/photo-1559839734-2b71f153678f?auto=format&fit=crop&q=80&w=400&h=500",
-    about: "Dr. Associate provides comprehensive dental care with a focus on preventive and routine treatments. With 8 years of experience, they are dedicated to maintaining the oral health of patients through regular checkups, cleanings, and patient education.",
-    specializations: [
-      { icon: React.createElement(Stethoscope, { size: 20 }), title: "General Dentistry" },
-      { icon: React.createElement(ShieldCheck, { size: 20 }), title: "Preventive Care" },
-      { icon: React.createElement(Smile, { size: 20 }), title: "Routine Checkups" },
-    ],
-    qualifications: [
-      "BDS from Government Dental College",
-      "Certified in Endodontics",
-      "Advanced Training in Laser Dentistry",
-    ],
-    treatments: [
-      "Root Canal Treatment",
-      "Dental Fillings",
-      "Professional Cleaning (Scaling)",
-      "Tooth Extractions",
-      "Pediatric Dentistry",
-    ],
-    reviews: [
-      { name: "Vikram Singh", rating: 5, text: "Very thorough cleaning and checkup. Explained everything very well.", date: "1 month ago" },
-      { name: "Anjali Rao", rating: 4, text: "Good experience, very polite and professional.", date: "2 months ago" },
-    ]
+    specialization: "PROSTHODONTIA",
+    doctors: ["Dr. Vaijanti Lotwani"]
+  },
+  {
+    specialization: "PERIODONTIA",
+    doctors: ["Dr. Varsha Jadhav", "Dr. Rajiv Chitgugppi"]
+  },
+  {
+    specialization: "ORAL SURGERY",
+    doctors: ["Dr. Deepak Jagtap"]
+  },
+  {
+    specialization: "PEDODONTICS",
+    doctors: ["Dr. Kavya", "Dr. Arvnd Neelkatham"]
+  },
+  {
+    specialization: "ORAL DIAGNOSIS",
+    doctors: ["Dr. Amol Dhokar"]
   }
 ];

@@ -25,7 +25,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import AppointmentBooking from './components/AppointmentBooking';
 import DoctorProfile from './components/DoctorProfile';
 import LeadPopup from './components/LeadPopup';
-import { DOCTORS } from './data/doctors';
+import { DOCTORS, CONSULTANTS } from './data/doctors';
 
 const SERVICES = [
   { 
@@ -540,12 +540,13 @@ const Home = () => {
               viewport={{ once: true }}
             >
               <h3 className="text-teal-primary font-bold tracking-[0.2em] uppercase text-sm mb-4">Our Specialists</h3>
-              <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-6">Meet Our Expert Team</h2>
-              <p className="text-lg text-slate-500">Dedicated professionals committed to providing you with the highest standard of dental care.</p>
+              <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-6">Main Doctors</h2>
+              <p className="text-lg text-slate-500">Our core team of highly experienced specialists dedicated to your dental health.</p>
             </motion.div>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-10">
+          {/* Main Doctors Grid */}
+          <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto mb-32">
             {DOCTORS.map((doc, idx) => (
               <motion.div 
                 key={idx}
@@ -553,42 +554,99 @@ const Home = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.15, duration: 0.6 }}
-                className="group bg-white rounded-[2.5rem] p-6 border border-slate-100 hover:border-teal-100 transition-all duration-500 hover:shadow-[0_32px_64px_-16px_rgba(13,148,136,0.1)]"
+                className="group bg-white rounded-[3rem] p-8 border border-slate-100 hover:border-teal-200 transition-all duration-500 hover:shadow-[0_40px_80px_-16px_rgba(13,148,136,0.15)] relative overflow-hidden"
               >
-                <div className="relative rounded-[2rem] overflow-hidden mb-8 aspect-[4/5]">
-                  <img 
-                    src={doc.image} 
-                    alt={doc.name} 
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
-                    referrerPolicy="no-referrer" 
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                </div>
+                <div className="absolute top-0 right-0 w-32 h-32 bg-teal-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-teal-100 transition-colors"></div>
                 
-                <div className="px-2">
-                  <h4 className="text-2xl font-bold text-slate-900 mb-1">{doc.name}</h4>
-                  <p className="text-teal-primary font-bold text-sm mb-2">{doc.role}</p>
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">{doc.experience}</p>
-                  <p className="text-slate-500 text-sm leading-relaxed line-clamp-3 group-hover:text-slate-600 transition-colors">
-                    {doc.bio}
-                  </p>
+                <div className="relative flex flex-col md:flex-row gap-8 items-center md:items-start">
+                  <div className="relative w-48 h-60 flex-shrink-0 rounded-[2rem] overflow-hidden shadow-xl border-4 border-white group-hover:scale-105 transition-transform duration-500">
+                    <img 
+                      src={doc.image} 
+                      alt={doc.name} 
+                      className="w-full h-full object-cover" 
+                      referrerPolicy="no-referrer" 
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  </div>
                   
-                  <div className="mt-8 pt-6 border-t border-slate-50 flex items-center justify-between">
-                    <div className="flex gap-3">
-                      <div className="w-9 h-9 bg-slate-50 text-slate-400 rounded-xl flex items-center justify-center hover:bg-teal-500 hover:text-white transition-all cursor-pointer">
-                        <MessageSquare size={16} />
-                      </div>
-                      <div className="w-9 h-9 bg-slate-50 text-slate-400 rounded-xl flex items-center justify-center hover:bg-teal-500 hover:text-white transition-all cursor-pointer">
-                        <Phone size={16} />
+                  <div className="flex-1 text-center md:text-left">
+                    <h4 className="text-3xl font-bold text-slate-900 mb-2">{doc.name}</h4>
+                    <p className="text-teal-primary font-bold text-lg mb-4">{doc.role}</p>
+                    <div className="inline-flex items-center gap-2 bg-slate-50 px-3 py-1 rounded-full text-[10px] font-black text-slate-400 uppercase tracking-widest mb-6">
+                      <Award size={12} className="text-teal-500" />
+                      {doc.experience}
+                    </div>
+                    <p className="text-slate-500 text-sm leading-relaxed mb-8 line-clamp-2 italic">
+                      "{doc.bio}"
+                    </p>
+                    
+                    <div className="flex flex-wrap items-center justify-center md:justify-start gap-4">
+                      <Link 
+                        to={`/doctor/${doc.id}`} 
+                        className="bg-slate-900 text-white px-6 py-3 rounded-2xl text-xs font-bold hover:bg-teal-600 transition-all shadow-lg shadow-slate-900/10 flex items-center gap-2"
+                      >
+                        View Profile <ChevronRight size={14} />
+                      </Link>
+                      <div className="flex gap-2">
+                        <div className="w-10 h-10 bg-teal-50 text-teal-primary rounded-xl flex items-center justify-center hover:bg-teal-500 hover:text-white transition-all cursor-pointer">
+                          <MessageSquare size={18} />
+                        </div>
+                        <a href="tel:+919975780529" className="w-10 h-10 bg-teal-50 text-teal-primary rounded-xl flex items-center justify-center hover:bg-teal-500 hover:text-white transition-all cursor-pointer">
+                          <Phone size={18} />
+                        </a>
                       </div>
                     </div>
-                    <Link to={`/doctor/${doc.id}`} className="text-xs font-bold text-teal-primary uppercase tracking-widest hover:underline">
-                      View Profile
-                    </Link>
                   </div>
                 </div>
               </motion.div>
             ))}
+          </div>
+
+          {/* Consultants Section */}
+          <div className="mt-20">
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+              >
+                <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-4">Consultants</h2>
+                <p className="text-teal-primary font-bold tracking-[0.1em] uppercase text-xs">With Prior Appointment Only</p>
+              </motion.div>
+            </div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+              {CONSULTANTS.map((group, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.05 }}
+                  className="bg-slate-50 rounded-[2rem] p-8 border border-slate-100 hover:border-teal-100 transition-all group"
+                >
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="w-12 h-12 bg-white text-teal-primary rounded-2xl flex items-center justify-center shadow-sm group-hover:medical-gradient group-hover:text-white transition-all duration-300">
+                      {group.specialization === "ORTHODONTIA" && <Sparkles size={24} />}
+                      {group.specialization === "PROSTHODONTIA" && <Smile size={24} />}
+                      {group.specialization === "PERIODONTIA" && <ShieldCheck size={24} />}
+                      {group.specialization === "ORAL SURGERY" && <Stethoscope size={24} />}
+                      {group.specialization === "PEDODONTICS" && <Heart size={24} />}
+                      {group.specialization === "ORAL DIAGNOSIS" && <Award size={24} />}
+                    </div>
+                    <h4 className="text-sm font-black text-slate-900 tracking-wider uppercase">{group.specialization}</h4>
+                  </div>
+                  <ul className="space-y-3">
+                    {group.doctors.map((doc, dIdx) => (
+                      <li key={dIdx} className="flex items-center gap-3 text-slate-600 font-medium">
+                        <div className="w-1.5 h-1.5 bg-teal-400 rounded-full"></div>
+                        {doc}
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
