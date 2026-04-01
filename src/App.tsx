@@ -19,7 +19,8 @@ import {
   Smile,
   Shield,
   ArrowRight,
-  ExternalLink
+  ExternalLink,
+  Zap
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import AppointmentBooking from './components/AppointmentBooking';
@@ -160,11 +161,11 @@ const Home = () => {
             </div>
 
             <div className="hidden md:flex items-center gap-6">
-              <a href="tel:+919975780529" className="flex items-center gap-2 text-slate-900 font-bold hover:text-teal-primary transition-colors">
+              <a href="tel:+919326712719" className="flex items-center gap-2 text-slate-900 font-bold hover:text-teal-primary transition-colors">
                 <div className="w-8 h-8 bg-teal-50 rounded-full flex items-center justify-center">
                   <Phone size={16} className="text-teal-primary" />
                 </div>
-                <span className="text-sm">+91 9975780529</span>
+                <span className="text-sm">+91 9326712719</span>
               </a>
               <button 
                 onClick={() => setIsPopupOpen(true)}
@@ -214,7 +215,7 @@ const Home = () => {
                     </a>
                   ))}
                   <div className="pt-6 space-y-4">
-                    <a href="tel:+919975780529" className="flex items-center justify-center gap-3 w-full py-4 border-2 border-teal-primary text-teal-primary rounded-2xl font-bold text-lg">
+                    <a href="tel:+919326712719" className="flex items-center justify-center gap-3 w-full py-4 border-2 border-teal-primary text-teal-primary rounded-2xl font-bold text-lg">
                       <Phone size={20} /> Call Now
                     </a>
                     <button 
@@ -271,7 +272,7 @@ const Home = () => {
                   Book Appointment <ArrowRight size={20} />
                 </button>
                 <a 
-                  href="tel:+919975780529"
+                  href="tel:+919326712719"
                   className="bg-white text-slate-900 border-2 border-slate-100 px-10 py-5 rounded-2xl text-lg font-bold hover:bg-slate-50 hover:border-slate-200 transition-all flex items-center justify-center gap-3 shadow-sm"
                 >
                   <Phone size={20} className="text-teal-primary" /> Call Now
@@ -576,9 +577,18 @@ const Home = () => {
                       <Award size={12} className="text-teal-500" />
                       {doc.experience}
                     </div>
-                    <p className="text-slate-500 text-sm leading-relaxed mb-8 line-clamp-2 italic">
+                    <p className="text-slate-500 text-sm leading-relaxed mb-4 line-clamp-2 italic">
                       "{doc.bio}"
                     </p>
+                    
+                    <ul className="space-y-2 mb-8 text-left">
+                      {doc.details.map((detail, dIdx) => (
+                        <li key={dIdx} className="flex items-start gap-2 text-xs text-slate-600">
+                          <CheckCircle2 size={14} className="text-teal-500 mt-0.5 flex-shrink-0" />
+                          <span>{detail}</span>
+                        </li>
+                      ))}
+                    </ul>
                     
                     <div className="flex flex-wrap items-center justify-center md:justify-start gap-4">
                       <Link 
@@ -591,7 +601,7 @@ const Home = () => {
                         <div className="w-10 h-10 bg-teal-50 text-teal-primary rounded-xl flex items-center justify-center hover:bg-teal-500 hover:text-white transition-all cursor-pointer">
                           <MessageSquare size={18} />
                         </div>
-                        <a href="tel:+919975780529" className="w-10 h-10 bg-teal-50 text-teal-primary rounded-xl flex items-center justify-center hover:bg-teal-500 hover:text-white transition-all cursor-pointer">
+                        <a href="tel:+919326712719" className="w-10 h-10 bg-teal-50 text-teal-primary rounded-xl flex items-center justify-center hover:bg-teal-500 hover:text-white transition-all cursor-pointer">
                           <Phone size={18} />
                         </a>
                       </div>
@@ -600,6 +610,47 @@ const Home = () => {
                 </div>
               </motion.div>
             ))}
+          </div>
+
+          {/* Highlight Achievements Section */}
+          <div className="mb-32">
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+              >
+                <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-4">Why Choose Happy Dental Clinic?</h2>
+                <p className="text-slate-500">Our commitment to excellence and patient satisfaction is reflected in our achievements.</p>
+              </motion.div>
+            </div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+              {[
+                { icon: <Award className="w-6 h-6" />, text: "1000+ Root Canal Treatments successfully completed" },
+                { icon: <ShieldCheck className="w-6 h-6" />, text: "1000+ Dental Implants placed" },
+                { icon: <Clock className="w-6 h-6" />, text: "One of the oldest dental clinics in Vikhroli" },
+                { icon: <Zap className="w-6 h-6" />, text: "Equipped with modern and advanced dental technology" },
+                { icon: <Sparkles className="w-6 h-6" />, text: "Pioneer of digital dentistry in Vikhroli at affordable rates" },
+                { icon: <Stethoscope className="w-6 h-6" />, text: "State-of-the-art dental clinic with latest equipment" },
+                { icon: <Heart className="w-6 h-6" />, text: "Strict sterilization and hygiene protocols" },
+                { icon: <CheckCircle2 className="w-6 h-6" />, text: "Personalized patient care and advanced treatment planning" }
+              ].map((item, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.05 }}
+                  className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all flex flex-col gap-4 group"
+                >
+                  <div className="w-12 h-12 bg-teal-50 text-teal-500 rounded-xl flex items-center justify-center group-hover:bg-teal-500 group-hover:text-white transition-all">
+                    {item.icon}
+                  </div>
+                  <p className="text-slate-700 font-medium text-sm leading-relaxed">{item.text}</p>
+                </motion.div>
+              ))}
+            </div>
           </div>
 
           {/* Consultants Section */}
@@ -726,7 +777,7 @@ const Home = () => {
                   Book Appointment <ArrowRight size={24} />
                 </button>
                 <a 
-                  href="tel:+919975780529"
+                  href="tel:+919326712719"
                   className="bg-teal-700/30 backdrop-blur-md text-white border-2 border-white/20 px-12 py-6 rounded-2xl text-xl font-bold hover:bg-teal-700/50 transition-all flex items-center justify-center gap-3"
                 >
                   <Phone size={24} /> Call Now
@@ -775,8 +826,8 @@ const Home = () => {
                   </div>
                   <div>
                     <h4 className="text-xl font-bold text-slate-900 mb-2">Phone Number</h4>
-                    <a href="tel:+919975780529" className="text-3xl font-black text-teal-primary hover:text-teal-700 transition-colors">
-                      +91 9975780529
+                    <a href="tel:+919326712719" className="text-3xl font-black text-teal-primary hover:text-teal-700 transition-colors">
+                      +91 9326712719
                     </a>
                     <p className="text-slate-400 text-sm mt-1 font-bold">Available for emergencies 24/7</p>
                   </div>
@@ -873,7 +924,7 @@ const Home = () => {
                   <div className="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center text-teal-400 group-hover:bg-teal-500 group-hover:text-white transition-all">
                     <Phone size={18} />
                   </div>
-                  <span className="text-sm">+91 9975780529</span>
+                  <span className="text-sm">+91 9326712719</span>
                 </li>
                 <li className="flex gap-4 group">
                   <div className="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center text-teal-400 group-hover:bg-teal-500 group-hover:text-white transition-all">
@@ -897,7 +948,7 @@ const Home = () => {
 
       {/* Floating WhatsApp Button */}
       <a 
-        href="https://wa.me/919975780529"
+        href="https://wa.me/919326712719"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-8 right-8 z-40 w-16 h-16 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform animate-float group"
