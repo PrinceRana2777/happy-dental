@@ -810,7 +810,7 @@ const Home = () => {
                       Mumbai, Maharashtra 400083
                     </p>
                     <a 
-                      href="https://www.google.com/maps/dir/?api=1&destination=Happy+Dental+Clinic+Vikhroli" 
+                      href="https://www.google.com/maps/dir/?api=1&destination=Happy+Dental+Clinic+Vikhroli+East+Mumbai" 
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 text-teal-primary font-bold mt-4 hover:underline"
@@ -860,18 +860,33 @@ const Home = () => {
               </div>
             </div>
 
-            <div className="h-[600px] rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white relative group">
-              <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.000000000000!2d72.9288888!3d19.1111111!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c7c7c7c7c7c7%3A0x7c7c7c7c7c7c7c7c!2sHappy%20Dental%20Clinic!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin" 
-                width="100%" 
-                height="100%" 
-                style={{ border: 0 }} 
-                allowFullScreen 
-                loading="lazy" 
-                referrerPolicy="no-referrer-when-downgrade"
-                className="grayscale hover:grayscale-0 transition-all duration-700"
-              ></iframe>
-              <div className="absolute inset-0 pointer-events-none border-[20px] border-white/10 rounded-[2.5rem]"></div>
+            <div className="relative group">
+              <div className="h-[400px] md:h-[600px] rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white relative">
+                <iframe 
+                  src="https://maps.google.com/maps?q=Happy%20Dental%20Clinic%20Vikhroli%20East%20Mumbai&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                  width="100%" 
+                  height="100%" 
+                  style={{ border: 0 }} 
+                  allowFullScreen 
+                  loading="lazy" 
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="grayscale hover:grayscale-0 transition-all duration-700"
+                  title="Happy Dental Clinic Location"
+                ></iframe>
+                <div className="absolute inset-0 pointer-events-none border-[20px] border-white/10 rounded-[2.5rem]"></div>
+              </div>
+              
+              <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20">
+                <a 
+                  href="https://www.google.com/maps/dir/?api=1&destination=Happy+Dental+Clinic+Vikhroli+East+Mumbai" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="bg-white text-slate-900 px-8 py-4 rounded-2xl font-bold shadow-2xl hover:bg-teal-500 hover:text-white transition-all flex items-center gap-3 whitespace-nowrap border border-slate-100"
+                >
+                  <MapPin size={20} className="text-teal-primary group-hover:text-white" />
+                  Open in Google Maps
+                </a>
+              </div>
             </div>
           </div>
         </div>
